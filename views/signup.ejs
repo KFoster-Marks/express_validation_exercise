@@ -1,17 +1,65 @@
 <% include partials/header %>
 
 
-
     <form class="" action="/signup" method="post">
-      <%# Add form validations for:
-      Username: Required. Must be more than 6 characters, must start with a letter, and no punctuation.
-      Password: Required. Must be more than 8 characters with atleast One letter, one number, and one special character (!?/.,')
+
+      Username: Required. Must be more than 6 characters, must start with a letter, and alphanumeric.
+
+      <label for="username">Username
+        <input type="text" name="username" value="<%= username %>" placeholder="username">
+      </label>
+
+      <!-- Password: Required. Must be more than 8 characters with atleast One letter, one number, and one special character (!?/.,')
+
+      <label for="password">Password
+        <input type="text" name="password"  placeholder="password" required>
+      </label>
+
       Email: Required. Must be formatted like an email, (something @ something . something)
+
+      <label for="email">Email
+        <input type="text" name="email" placeholder="email" required>
+      </label>
+
       First Name: Required.
+
+      <label for="firstname">First Name
+        <input type="text" name="firstname"  placeholder="firstname" required>
+      </label>
+
       Last Name: Required.
-      Phone Number: Required. Must be a 10 digit number formatted like: 999-888-9898%>
+
+      <label for="lastname">Last Name
+        <input type="text" name="lastname"  placeholder="lastname" required>
+      </label>
+
+      Phone Number: Required. Must be a 10 digit number formatted like: 999-888-9898
+
+      <label for="phone">Phone
+        <input type="text" name="phone" placeholder="phone" required>
+      </label> -->
+
+      <button class="btn btn-primary" type="submit">Submit</button>
 
     </form>
 
+    <% if(hasError) { %>
+      <div class="row">
+        <div class="col-md-6 errorBlock">
+          <% for(var item in error) { %>
+            <strong><h6><%= item %></h6></strong>
+            <ul>
+            <% for(var i = 0; i < error[item].length; i++) { %>
+                <li>
+                  <i>
+                    <%= error[item][i].message %>
+                  </i>
+                </li>
+            <% } %>
+            </ul>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
 
 <% include partials/footer %>
