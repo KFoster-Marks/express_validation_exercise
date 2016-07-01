@@ -22,10 +22,11 @@ router.post('/', function(req, res){
     hasError: false
   };
   info.error = {};
-  checkRequired(info, req);
+
   checkUsername(req, info);
   checkPassword(req, info);
   checkEmail(info, req);
+  checkRequired(info, req);
   if (info.hasError === true) {
     res.render('signup', info);
   } else {
@@ -33,20 +34,20 @@ router.post('/', function(req, res){
   }
 });
 
+
 function checkRequired(info, req) {
   console.log("Entering checkRequired function");
   for( var item in req.body ) {
     info[item] = req.body[item];
-    if( req.body[item] === '' )
-    {
+    if( req.body[item] === '' ) {
       console.log("Recognized that nothing is there");
-      if( !info.error[item] )
-      {
+      if( !info.error[item] )  {
         info.error[item] = [];
       }
       info.hasError = true;
       info.error[item].push({message: item + " is required."});
     }
+    console.log(info.error[item][0].message);
   }
 }
 
@@ -98,10 +99,12 @@ function checkEmail(info, req) {
 
   for(var i=1; i < emailString.length; i++) {
     if(emailString[i] === '@' || atFound)  {
+
       if(atFound && emailString[i] === '.')  {
         //This email has an @ and dot in the right order.
         dotFound = true;
       }
+
       atFound = true;
     }
   }
