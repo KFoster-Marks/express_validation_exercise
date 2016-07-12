@@ -76,9 +76,9 @@ function checkUsername(req, info) {
 function checkPassword(req, info) {
   info.password = req.body.password;
   info.error.password = [];
-  if(req.body.password.length <= 8) {
+  if(req.body.password.length <= 4) {
     info.hasError = true;
-    info.error.password.push({message: "Password should be 9 or more characters."});
+    info.error.password.push({message: "Password should be 5 or more characters."});
   }
   var regex = /[A-Za-z]/;
   if (!req.body.password.match(regex)) {
